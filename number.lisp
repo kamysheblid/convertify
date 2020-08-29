@@ -2,10 +2,6 @@
 
 (in-package #:conversions)
 
-(defun convert (arg type)
-  "Convert ARG to TYPE."
-  nil)
-
 (defgeneric number (arg))
 (defmethod number ((char character))
   (let ((result (- (char-code char) (char-code #\0))))
@@ -26,14 +22,3 @@
     (incf sum
 	  (* (expt 10 (- len pos 1))
 	     (aref arr pos)))))
-
-
-
-(defun array-to-string (arr)
-  (declare (array arr))
-  (let ((lst (coerce arr 'list)))
-    (apply #'concatenate
-	   (mapcar
-	    (lambda (num)
-	      (format nil "~A" num))))))
-
