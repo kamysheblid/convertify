@@ -1,4 +1,5 @@
 ;;;; package.lisp
 
-(defpackage #:conversions
-  (:use #:cl))
+(defpackage #:convertify
+  (:use #:cl)
+  (:export #:convert #:numberify #:stringify #:characterify #:listify #:arrayify))
