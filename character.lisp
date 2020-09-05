@@ -6,7 +6,7 @@
   (:documentation
    "Turn LIST CHARACTER STRING SYMBOL NUMBER OR ARRAY into a character or characters.
 CHARACTER returns itself.
-ARRAY returns an array containing the characters. It is recursive, so if one element of ARRAY is 123, it will become a list of characters.
+ARRAY returns a list containing the input as characters. It is recursive, so if one element of ARRAY is 123, it will become a list of characters.
 STRING returns a list containing the characters of STRING.
 SYMBOL returns a list containing the characters of SYMBOL.
 NUMBER returns a list containing the digits as characters.
@@ -35,5 +35,5 @@ LIST returns an array containing the elements as characters. It is recursive, so
   (do* ((tmp (list))
 	(len (length arr))
 	(pos (1- len) (decf pos)))
-      ((< pos 0) (apply #'vector tmp))
+      ((< pos 0) tmp)
     (push (characterify (aref arr pos)) tmp)))
