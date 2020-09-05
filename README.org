@@ -4,26 +4,64 @@ _Kamy Sheblid <kamysheblid@gmail.com>_
 This package is built to turn arrays, characters, strings, symbols, numbers, arrays, and lists into each other.
 
 ** License
-
-GPLv3 license. See LICENSE file for more information.
+   GPLv3 license. See LICENSE file for more information.
 
 ** Todo
+*** Converting symbol to list
 
-*** When converting a symbol to a list, sometimes it returns chars and sometimes it returns numbers. (convert '123 'list) => (1 2 3) but (convert 'a123 'list) => (#\a #\1 #\2 #\3).
+    Sometimes it returns chars and sometimes it returns
+    numbers. (convert '123 'list) => (1 2 3) but (convert 'a123 'list)
+    => (#\a #\1 #\2 #\3).
 
-I could add an optional parameter to handle this so user can say whether it should be char or num, but it can also be handled by turning the number into a string, (convert "123" 'list) => (#\1 #\2 #\3).
+    I could add an optional parameter to handle this so user can say
+    whether it should be char or num, but it can also be handled by
+    turning the number into a string, (convert "123" 'list) => (#\1
+    #\2 #\3).
 
-The benefit of adding an optional parameter will be so that (convert "123" 'list 'number) => (1 2 3) instead of a list of characters.
+    The benefit of adding an optional parameter will be so that
+    (convert "123" 'list 'number) => (1 2 3) instead of a list of
+    characters.
 
-There is an easy workaround though, as we can just (mapcar #'numberify numbers-as-char-list.
+    There is an easy workaround though, as we can just (mapcar
+    #'numberify numbers-as-char-list. Though this way of handling it
+    seems awkward.
 
-*** When converting to number or string, if I pass a list or array then all the elements must be single digits as chars, numbers, or strings. If they arent then current implementation cannot handle it.
+*** Converting list/array to number/string
+    All the elements must be single digits (ex. chars, numbers, or
+    strings). If the results arent then current implementation cannot
+    handle it.
 
-This can be fixed by flattening the list/array.
+    This can be fixed by flattening the list/array.
 
-*** When converting an array/list of symbols into something else, it will capitalize those symbols and it will never turn them into a sequence of characters. This is a gotcha/bug.
+*** Converting array/list of symbols (made of letters)
+    When converting a list/array of symbols to chars/string the
+    symbols will be capitalized. 
 
-*** When converting a number (ex 123) to a list/array it will be converted to list/array (1 2 3) instead of (123). This is because it is more useful to be able to split it into its elements since we can just do (list 123) to get the other result.
+    I would expect the case to be passed on down the line, but because
+    of the way common-lisp works it will always capitalize symbols.
 
-*** Sometimes when handing a function an array, it will return an array, fix this so that it is more consistent. Always return a list. It is easy to convert a list to an array -- just do (vec the-list) -- so it is better to be consistent.
+    Figure out a way to make this less weird or more explicit.
 
+*** Converting number to a list/array
+    Number (ex 123) conversion to list/array gives (1 2 3) instead of
+    (123). This is because it is more useful to be able to split it
+    into its elements since we can just do (list 123) to get the other
+    result.
+
+    Add this into the documentation to reduce confusion.
+
+    Maybe the function should be renamed to make it more obvious or
+    integrate it into the =convert= function to make it more explicit.
+
+*** Inconsistent handling of arrays as arg
+    Sometimes when handing a function an array, it will return an
+    array and othertimes it will give a list. 
+
+    Fix this so that it is more consistent. Always return a list. It
+    is easy to convert a list to an array -- just do (vec the-list) --
+    so it is better to be consistent.
+
+*** Possible modification to =convert= function
+    Some conversions are not obvious. It might make more sense to
+    change the =convert= function to take another (possible optional)
+    parameter which makes it more obvious what is going to happen.
