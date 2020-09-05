@@ -58,3 +58,40 @@
 (deftest number-string->list (list-suite) (assert-equalp (listify number-string) char-number-list))
 (deftest letter-string->list (list-suite) (assert-equalp (listify letter-string) char-letter-list))
 (deftest letter-array->list (list-suite) (assert-equalp (listify letter-array) letter-list))
+
+;;; test stringify
+
+(defsuite string-suite ())
+
+(deftest letter-string->string (string-suite) (assert-equalp (stringify letter-string) letter-string))
+(deftest number-string->string (string-suite) (assert-equalp (stringify number-string) number-string))
+(deftest chr->string (string-suite) (assert-equalp (stringify chr) (string chr)))
+(deftest char-letter-list->string (string-suite) (assert-equalp (stringify char-letter-list) letter-string))
+(deftest char-symbol-array->string (string-suite) (assert-equalp (stringify char-symbol-array) letter-string))
+(deftest letter-array->string (string-suite) (assert-equalp (stringify letter-array) letter-string))
+(deftest char-number-array->string (string-suite) (assert-equalp (stringify char-number-array) number-string))
+(deftest number-array->string (string-suite) (assert-equalp (stringify number-array) number-string))
+(deftest num->string (string-suite) (assert-equalp (stringify num) number-string))
+(deftest number-symbol->string (string-suite) (assert-equalp (stringify number-symbol) number-string))
+(deftest letter-symbol->string (string-suite) (assert-equalp (stringify letter-symbol) letter-string))
+
+(defsuite character-suite ())
+
+(deftest chr->character (character-suite) (assert-equalp (characterify chr) chr))
+(deftest char-list->character (character-suite) (assert-equalp (characterify char-list) character-list))
+(deftest letter-string->character (character-suite) (assert-equalp (characterify letter-string) char-letter-list))
+(deftest number-string->character (character-suite) (assert-equalp (characterify number-string) char-number-list))
+(deftest letter-symbol->character (character-suite) (assert-equalp (characterify letter-symbol) char-letter-list))
+(deftest number-symbol->character (character-suite) (assert-equalp (characterify number-symbol) char-number-list))
+(deftest num->character (character-suite) (assert-equalp (characterify num) char-number-list))
+(deftest char-letter-list->character (character-suite) (assert-equalp (characterify char-letter-list) char-letter-list))
+(deftest letter-list->character (character-suite) (assert-equalp (characterify letter-list) char-letter-list))
+(deftest number-list->character (character-suite) (assert-equalp (characterify number-list) char-number-list))
+(deftest num-list->character (character-suite) (assert-equalp (characterify num-list) (list number-list)))
+(deftest char-number-list->character (character-suite) (assert-equalp (characterify char-number-list) char-number-list))
+(deftest char-list->character (character-suite) (assert-equalp (characterify char-list) char-list))
+(deftest char-letter-array->character (character-suite) (assert-equalp (characterify char-letter-array) letter-list))
+(deftest char-symbol-array->character (character-suite) (assert-equalp (characterify char-symbol-array) letter-list))
+(deftest char-number-array->character (character-suite) (assert-equalp (characterify char-number-array) char-number-list))
+(deftest number-array->character (character-suite) (assert-equalp (characterify number-array) char-number-list))
+
