@@ -1,3 +1,0 @@
-;;;; convertify-tests.asd
-
-
