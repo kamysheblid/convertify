@@ -20,12 +20,11 @@
   (format nil "~A" sym))
 
 (defmethod stringify ((arr array))
-  nil)
+  (let* ((coerced-lst (coerce arr 'list))
+	 (strings-lst
+	  (mapcar (lambda (elt)
+		    (format nil "~A" elt)) coerced-lst)))
+    (eval (array-to-stringify strings-lst))))
 
-(defun array-to-stringify (arr)
-  (declare (array arr))
-  (let ((lst (coerce arr 'list)))
-    (apply #'concatenate
-	   (mapcar
-	    (lambda (num)
-	      (format nil "~A" num))))))
+(defun array-to-stringify (lst)
+  `(concatenate 'string ,@lst))
