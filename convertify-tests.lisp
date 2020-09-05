@@ -43,7 +43,7 @@
 (deftest number-list->array (array-suite) (assert-equalp number-array (arrayify number-list)))
 (deftest letter-list->array (array-suite) (assert-equalp char-symbol-array (arrayify letter-list)))
 (deftest char-letter-list->array (array-suite) (assert-equalp char-letter-array (arrayify char-letter-list)))
-(deftest number-string->array (array-suite) (assert-equalp char-number-array (arrayify number-string)))
+(deftest number-string->array (array-suite) (assert-equalp number-array (arrayify char-number-array)))
 (deftest letter-string->array (array-suite) (assert-equalp char-letter-array (arrayify letter-string)))
 (deftest num->array (array-suite) (assert-equalp number-array (arrayify num)))
 (deftest number-symbol->array (array-suite) (assert-equalp number-array (arrayify number-symbol)))
