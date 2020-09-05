@@ -99,3 +99,13 @@
 (deftest char-number-array->character (character-suite) (assert-equalp (characterify char-number-array) char-number-list))
 (deftest number-array->character (character-suite) (assert-equalp (characterify number-array) char-number-list))
 
+(defsuite number-suite (convertify-suite))
+
+(deftest num->number (number-suite) (assert-equalp (numberify num) num))
+(deftest number-symbol->number (number-suite) (assert-equalp (numberify number-symbol) num))
+(deftest char-num->number (number-suite) (assert-equalp (numberify char-num) 1))
+(deftest number-string->number (number-suite) (assert-equalp (numberify number-string) num))
+(deftest number-list->number (number-suite) (assert-equalp (numberify number-list) num))
+(deftest num-list->number (number-suite) (assert-equalp (numberify num-list) num))
+(deftest char-number-list->number (number-suite) (assert-equalp (numberify char-number-list) num))
+(deftest char-number-array->number (number-suite) (assert-equalp (numberify char-number-array) num))
