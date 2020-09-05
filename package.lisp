@@ -2,4 +2,4 @@
 
 (defpackage #:convertify
   (:use #:cl)
-  (:export #:convert #:numberify #:stringify #:characterify #:listify #:arrayify))
+  (:export #:convertify #:numberify #:stringify #:characterify #:listify #:arrayify))
