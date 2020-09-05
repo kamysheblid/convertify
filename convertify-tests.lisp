@@ -27,10 +27,14 @@
 
 (defvar num 123)
 (defvar chr #\A)
+(defvar char-num #\1)
+
+;;; Simply test this test suite and all other suites will run
+(defsuite convertify-suite ())
 
 ;;; test arrayify
 
-(defsuite array-suite ())
+(defsuite array-suite (convertify-suite))
 
 (deftest number-array->array (array-suite) (assert-equalp number-array (arrayify number-array)))
 (deftest letter-array->array (array-suite) (assert-equalp letter-array (arrayify letter-array)))
@@ -47,7 +51,7 @@
 
 ;;; test listify
 
-(defsuite list-suite ())
+(defsuite list-suite (convertify-suite))
 
 (deftest  char-letter-list->list (list-suite) (assert-equalp (listify char-letter-list) char-letter-list))
 (deftest  letter-list->list (list-suite) (assert-equalp (listify letter-list) letter-list))
@@ -61,7 +65,7 @@
 
 ;;; test stringify
 
-(defsuite string-suite ())
+(defsuite string-suite (convertify-suite))
 
 (deftest letter-string->string (string-suite) (assert-equalp (stringify letter-string) letter-string))
 (deftest number-string->string (string-suite) (assert-equalp (stringify number-string) number-string))
@@ -75,7 +79,7 @@
 (deftest number-symbol->string (string-suite) (assert-equalp (stringify number-symbol) number-string))
 (deftest letter-symbol->string (string-suite) (assert-equalp (stringify letter-symbol) letter-string))
 
-(defsuite character-suite ())
+(defsuite character-suite (convertify-suite))
 
 (deftest chr->character (character-suite) (assert-equalp (characterify chr) chr))
 (deftest char-list->character (character-suite) (assert-equalp (characterify char-list) character-list))
