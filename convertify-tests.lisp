@@ -78,6 +78,7 @@
 (deftest num->string (string-suite) (assert-equalp (stringify num) number-string))
 (deftest number-symbol->string (string-suite) (assert-equalp (stringify number-symbol) number-string))
 (deftest letter-symbol->string (string-suite) (assert-equalp (stringify letter-symbol) letter-string))
+(deftest list-in-list->string (string-suite) (assert-equalp (stringify '(1a (2 b (3c) 4 (d5) e6f))) "1A2B3C4D5E6F"))
 
 (defsuite character-suite (convertify-suite))
 
