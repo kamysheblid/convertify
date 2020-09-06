@@ -12,7 +12,11 @@
 	       (:file "number" :depends-on ("package"))
 	       (:file "array" :depends-on ("package"))
                (:file "convertify"
-		      :depends-on ("string" "character" "array" "list" "number"))))
+		      :depends-on ("string"
+				   "character"
+				   "array"
+				   "list"
+				   "number"))))
 
 (asdf:defsystem #:convertify-tests
   :description "Convertify tests"

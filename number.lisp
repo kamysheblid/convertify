@@ -4,9 +4,9 @@
 
 (defgeneric numberify (arg)
   (:documentation
-   "Turn LIST CHARACTER STRING SYMBOL NUMBER OR ARRAY into a number.
+   "Turn LIST CHARACTER STRING SYMBOL NUMBER OR ARRAY into a NUMBER.
 NUMBER returns itself.
-CHARACTER returns digit, CHARACTER must be a digit between 0-9.
+CHARACTER returns digit, CHARACTER must be between 0-9.
 STRING returns the number, all inputs must be between 0-9.
 SYMBOL returns the number.
 ARRAY returns the number with digits going from right to left. All the elements of ARRAY must be single digits as numbers, characters, or strings.

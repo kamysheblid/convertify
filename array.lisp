@@ -4,13 +4,13 @@
 
 (defgeneric arrayify (arg)
   (:documentation
-   "Turn LIST CHARACTER STRING SYMBOL NUMBER OR ARRAY into an array.
+   "Turn LIST CHARACTER STRING SYMBOL NUMBER OR ARRAY into an ARRAY.
 ARRAY returns itself.
-CHARACTER returns an array containing the character.
-STRING returns an array containing the characters of STRING.
-SYMBOL returns an array containing the characters of SYMBOL.
-NUMBER returns an array containing the digits.
-LIST returns an array containing the elements."))
+CHARACTER returns ARRAY containing the character.
+STRING returns ARRAY containing the characters of STRING.
+SYMBOL returns ARRAY containing the characters of SYMBOL.
+NUMBER returns ARRAY containing the digits.
+LIST returns ARRAY containing the elements."))
 
 (defmethod arrayify ((arr array))
   arr)
