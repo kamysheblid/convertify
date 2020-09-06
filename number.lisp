@@ -6,20 +6,18 @@
   (:documentation
    "Turn LIST CHARACTER STRING SYMBOL NUMBER OR ARRAY into a NUMBER.
 NUMBER returns itself.
-CHARACTER returns digit, CHARACTER must be between 0-9.
-STRING returns the number, all inputs must be between 0-9.
+CHARACTER returns digit.
+STRING returns the number.
 SYMBOL returns the number.
-ARRAY returns the number with digits going from right to left. All the elements of ARRAY must be single digits as numbers, characters, or strings.
-LIST returns the number with digits going from right to left."))
+ARRAY/LIST returns the number with digits going from left to right, it is recursive and will return the number which is made up of the leaves of the SEQUENCE. (numberify (1 (2 (3)))) => 123
+
+All input must contain digits between 0-9 only, or it will error."))
 
 (defmethod numberify ((num number))
   num)
 
 (defmethod numberify ((char character))
-  (let ((result (- (char-code char) (char-code #\0))))
-    (if (and (< result 10) (>= result 0))
-	result
-	(error "ARG is not a number between 0-9: ~A" char))))
+  (numberify (string char)))
 
 (defmethod numberify ((str string))
   ;; parse-integer prints the number of digits, not sure how to stop
