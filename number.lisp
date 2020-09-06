@@ -22,38 +22,17 @@ LIST returns the number with digits going from right to left."))
 	(error "ARG is not a number between 0-9: ~A" char))))
 
 (defmethod numberify ((str string))
-  (numberify (apply #'vector
-		    (mapcar #'numberify
-			    (coerce str 'list)))))
+  ;; parse-integer prints the number of digits, not sure how to stop
+  ;; that. Will figure out later and get rid of this let block.
+  (let ((result
+	 (parse-integer str :junk-allowed nil)))
+    result))
 
 (defmethod numberify ((lst list))
-  (numberify (apply #'vector (mapcar #'numberify lst))))
+  (numberify (stringify lst)))
 
 (defmethod numberify ((arr array))
-  ;; First convert everything inside the array to numbers, as they might be chars or strings, but they should all be 1 digit.
-  (do ((pos 0 (incf pos))
-       (len (length arr)))
-      ((= pos len))
-    (setf (aref arr pos)
-	  (numberify
-	   (let ((elt (aref arr pos)))
-	     (typecase elt
-	       (number elt)
-	       (character (numberify elt))
-	       ;; Check to make sure it is 
-	       (string (if (= (length elt) 1)
-			   (numberify elt)
-			   (error "One of the elements of your ARR is not 1 digit: ~A" elt)))
-	       (otherwise (error "I cant handle an element of type ~A: ~A" (type-of elt) elt)))))))
-
-  ;; Finally turn the array into a number.
-  (do ((pos 0 (incf pos))
-       (len (length arr))
-       (sum 0))
-      ((= pos len) sum)
-    (incf sum
-	  (* (expt 10 (- len pos 1))
-	     (aref arr pos)))))
+  (numberify (stringify arr)))
 
 (defmethod numberify ((sym symbol))
   (numberify (format nil "~A" sym)))
