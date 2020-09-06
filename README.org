@@ -75,3 +75,15 @@
 
     Possibly add an option to ignore any inputs that are not numbers
     so that doing (numberify "a12b") => 12.
+
+*** Remove =let= block in =numberify= for string
+    Numberify uses =parse-integer= to turn a string of numbers into a
+    number quickly. I put it in a =let= block so it wouldnt print the
+    number of digits. I need to figure out how to disable the printing
+    later.
+
+*** Add radix to =numberify=
+    Using =parse-integer= makes =numberify= very easy to use. I can
+    add an optional argument to help change the radix with very little
+    work.
+    
