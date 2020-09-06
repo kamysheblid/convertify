@@ -33,3 +33,6 @@ LIST returns ARRAY containing the elements."))
 
 (defmethod arrayify ((sym symbol))
   (arrayify (format nil "~A" sym)))
+
+(defmethod arrayify ((char character))
+  (vector char))
