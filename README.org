@@ -2,88 +2,92 @@
   This package is built to turn arrays, characters, strings, symbols,
   numbers, and lists into each other.
 
-** License
-   GPLv3 license. See LICENSE file for more information.
+  I built this package because I found I frequently try to convert
+  from one type to another and I couldnt easily find a package that
+  was able to do this.
 
-** Todo
-*** Converting symbol to list
+* License
+  GPLv3 license. See LICENSE file for more information.
 
-    Sometimes it returns chars and sometimes it returns
-    numbers. (convert '123 'list) => (1 2 3) but (convert 'a123 'list)
-    => (#\a #\1 #\2 #\3).
+* Todo
+** Converting symbol to list
 
-    I could add an optional parameter to handle this so user can say
-    whether it should be char or num, but it can also be handled by
-    turning the number into a string, (convert "123" 'list) => (#\1
-    #\2 #\3).
+   Sometimes it returns chars and sometimes it returns
+   numbers. (convert '123 'list) => (1 2 3) but (convert 'a123 'list)
+   => (#\a #\1 #\2 #\3).
 
-    The benefit of adding an optional parameter will be so that
-    (convert "123" 'list 'number) => (1 2 3) instead of a list of
-    characters.
+   I could add an optional parameter to handle this so user can say
+   whether it should be char or num, but it can also be handled by
+   turning the number into a string, (convert "123" 'list) => (#\1
+   #\2 #\3).
 
-    There is an easy workaround though, as we can just (mapcar
-    #'numberify numbers-as-char-list. Though this way of handling it
-    seems awkward.
+   The benefit of adding an optional parameter will be so that
+   (convert "123" 'list 'number) => (1 2 3) instead of a list of
+   characters.
 
-*** Converting list/array to number/string
-    All the elements must be single digits (ex. chars, numbers, or
-    strings). If the results arent then current implementation cannot
-    handle it.
+   There is an easy workaround though, as we can just (mapcar
+   #'numberify numbers-as-char-list. Though this way of handling it
+   seems awkward.
 
-    This can be fixed by flattening the list/array.
+** Converting list/array to number/string
+   All the elements must be single digits (ex. chars, numbers, or
+   strings). If the results arent then current implementation cannot
+   handle it.
 
-*** Converting array/list of symbols (made of letters)
-    When converting a list/array of symbols to chars/string the
-    symbols will be capitalized. 
+   This can be fixed by flattening the list/array.
 
-    I would expect the case to be passed on down the line, but because
-    of the way common-lisp works it will always capitalize symbols.
+** Converting array/list of symbols (made of letters)
+   When converting a list/array of symbols to chars/string the
+   symbols will be capitalized. 
 
-    Figure out a way to make this less weird or more explicit.
+   I would expect the case to be passed on down the line, but because
+   of the way common-lisp works it will always capitalize symbols.
 
-*** Converting number to a list/array
-    Number (ex 123) conversion to list/array gives (1 2 3) instead of
-    (123). This is because it is more useful to be able to split it
-    into its elements since we can just do (list 123) to get the other
-    result.
+   Figure out a way to make this less weird or more explicit.
 
-    Add this into the documentation to reduce confusion.
+** Converting number to a list/array
+   Number (ex 123) conversion to list/array gives (1 2 3) instead of
+   (123). This is because it is more useful to be able to split it
+   into its elements since we can just do (list 123) to get the other
+   result.
 
-    Maybe the function should be renamed to make it more obvious or
-    integrate it into the =convert= function to make it more explicit.
+   Add this into the documentation to reduce confusion.
 
-*** Inconsistent handling of arrays as arg
-    Sometimes when handing a function an array, it will return an
-    array and othertimes it will give a list. 
+   Maybe the function should be renamed to make it more obvious or
+   integrate it into the =convert= function to make it more explicit.
 
-    Fix this so that it is more consistent. Always return a list. It
-    is easy to convert a list to an array -- just do (vec the-list) --
-    so it is better to be consistent.
+** Inconsistent handling of arrays as arg
+   Sometimes when handing a function an array, it will return an
+   array and othertimes it will give a list. 
 
-*** Possible modification to =convert= function
-    Some conversions are not obvious. It might make more sense to
-    change the =convert= function to take another (possible optional)
-    parameter which makes it more obvious what is going to happen.
+   Fix this so that it is more consistent. Always return a list. It
+   is easy to convert a list to an array -- just do (vec the-list) --
+   so it is better to be consistent.
 
-*** Conversion of nil
-    Add methods for each type so nil is converted to correct value,
-    ex. (stringify nil) => ""
+** Possible modification to =convert= function
+   Some conversions are not obvious. It might make more sense to
+   change the =convert= function to take another (possible optional)
+   parameter which makes it more obvious what is going to happen.
 
-*** Converting to numbers
-    Currently =numberify= cannot handle input besides numbers (ex.
-    numbers as characters). 
+** Conversion of nil
+   Add methods for each type so nil is converted to correct value,
+   ex. (stringify nil) => ""
 
-    Possibly add an option to ignore any inputs that are not numbers
-    so that doing (numberify "a12b") => 12.
+** Converting to numbers
+   Currently =numberify= cannot handle input besides numbers (ex.
+   numbers as characters). 
 
-*** Remove =let= block in =numberify= for string
-    Numberify uses =parse-integer= to turn a string of numbers into a
-    number quickly. I put it in a =let= block so it wouldnt print the
-    number of digits. I need to figure out how to disable the printing
-    later.
+   Possibly add an option to ignore any inputs that are not numbers
+   so that doing (numberify "a12b") => 12.
 
-*** Add radix to =numberify=
-    Using =parse-integer= makes =numberify= very easy to use. I can
-    add an optional argument to help change the radix with very little
-    work.
+** Remove =let= block in =numberify= for string
+   Numberify uses =parse-integer= to turn a string of numbers into a
+   number quickly. I put it in a =let= block so it wouldnt print the
+   number of digits. I need to figure out how to disable the printing
+   later.
+
+** Add radix to =numberify=
+   Using =parse-integer= makes =numberify= very easy to use. I can
+   add an optional argument to help change the radix with very little
+   work.
     
