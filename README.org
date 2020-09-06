@@ -65,3 +65,7 @@ This package is built to turn arrays, characters, strings, symbols, numbers, arr
     Some conversions are not obvious. It might make more sense to
     change the =convert= function to take another (possible optional)
     parameter which makes it more obvious what is going to happen.
+
+*** Conversion of nil
+    Add methods for each type so nil is converted to correct value,
+    ex. (stringify nil) => ""
